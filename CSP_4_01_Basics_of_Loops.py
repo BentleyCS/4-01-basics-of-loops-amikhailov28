@@ -1,15 +1,22 @@
 #All questions must use a loop for full points.
+import random
 
-def oddNumbers(n:int) ->str:
+def oddNumbers(n:int) -> str:
     """
-    Print out all odd numbers from 1 to n(inclusive) in a single string seperated by spaces.
+    Print out all odd numbers from 1 to n(inclusive) in a single string separated by spaces.
     example oddNumbers(5) -> "1 3 5"
     example oddNumbers(8) -> "1 3 5 7"
     example oddNumbers(-8) -> ""
     """
+    answer = ""
+    for i in range (1, n+1, 2):
+        answer += str(i) + " "
+    answer = answer[0 : len(answer) - 1]
+    return answer
+print(oddNumbers(5))
 
 
-def backwards(n)-> int:
+def backwards(n) -> str:
     """
     modify the below function such that it prints out all the numbers from n to 1
     inclusive starting at n and counting down to 1
@@ -17,8 +24,13 @@ def backwards(n)-> int:
     example backwards(8) -> "8 7 6 5 4 3 2 1"
     example backwards(-2) -> ""
     """
-
-
+    answer = ""
+    while n >= 1:
+        answer += str(n) + " "
+        n -= 1
+    answer = answer[0: len(answer) - 1]
+    return answer
+print(backwards(5))
 
 def randomRepeating():
     """
@@ -27,8 +39,15 @@ def randomRepeating():
     NOTE: Given randomness no test for this question
     :return:
     """
-    tries = 0
-    print(f"it took {tries} tries to get a 10")
+    counter = 1
+    i = random.randint(1, 10)
+    while i != 10:
+        i = random.randint(1, 10)
+        counter += 1
+    print(f"it took {counter} tries to get a 10")
+    print("\n")
+randomRepeating()
+
 def randomRange(n):
     """
     Generate a random number from 1 to 100 n number of times. Then after that is
@@ -37,27 +56,62 @@ def randomRange(n):
     :param n:
     :return:
     """
-def reverse(word:str)->str:
+    high = 0
+    low = 101
+    for _ in range(n):
+        new = random.randint(1, 100)
+        if new > high:
+            high = new
+        elif new < low:
+            low = new
+    print(f"The lowest number is {low} and the highest number is {high}")
+    print("\n")
+randomRange(5)
+
+
+
+def reverse(word:str) -> str:
     """
     Takes in a string as an argument and return the given string in reverse.
     example reverse("cat") -> "tac"
     example reverse("Hello") -> "olleH"
     """
+    answer = ""
+    t = len(word) + 1
+    for _ in range(t - 1):
+        t -= 1
+        answer += word[t - 1 : t]
+    return answer
+print(reverse("anthropology"))
 
-def fizzBuzzContinuous(n):
+
+def fizzBuzzContinuous(n) -> str:
     """
     Modify the function such that it does the fizzbuzz operation on all numbers
     from 1 to n(inclusive).
     Fizz buzz is defined as
-    if the number is divisble by 3 print fizz
+    if the number is divisible by 3 print fizz
     if the number is divisible by 5 print buzz
     if the number is divisible by both 3 and 5 print fizzbuzz
     if none of the above apply print the number.
 
-    As with above questions add each anseer to a string and return the final string.
+    As with above questions add each answer to a string and return the final string.
     :param n:
     :return:
     """
+    answer = ""
+    for i in range(1, n + 1):
+        if i % 3 == 0 and i % 5 == 0:
+            answer += "fizzbuzz" + " "
+        elif i % 3 == 0:
+            answer += "fizz" + " "
+        elif i % 5 == 0:
+            answer += "buzz" + " "
+        else:
+            answer += str(i) + " "
+    answer = answer[0 : len(answer) - 1]
+    return answer
+print(fizzBuzzContinuous(16))
 
 def collatz(n):
     """
@@ -69,12 +123,23 @@ def collatz(n):
     :param n:
     :return:
     """
-
+    answer = str(n) + " "
+    while n != 1:
+        if n % 2 == 0:
+            n /= 2
+            answer += str(int(n)) + " "
+        else:
+            n *= 3
+            n += 1
+            answer += str(int(n)) + " "
+    answer = answer[0: len(answer) - 1]
+    return answer
+print(collatz(5))
 
 def fibonacci(n):
     """
     for the given argument n print out the first n numbers of the fibonacci
-    sequence in a single string sperated by spaces.
+    sequence in a single string separated by spaces.
     The fibonacci sequence is defined as a sequence that starts with 0 then 1 as
     the first two numbers. Every subsequent number is the prior two numbers added together.
     Example fibonacci(6) -> "0 1 1 2 3 5"
@@ -83,6 +148,25 @@ def fibonacci(n):
     :param n:
     :return:
     """
+    answer = ""
+    previous = 0
+    current = 1
+    if n == 0:
+        pass
+    elif n == 1:
+        answer += "0 "
+    elif n == 2:
+        answer += "0 1 "
+    elif n > 2:
+        answer += "0 1 "
+        for i in range(0, n - 2):
+            new = previous + current
+            previous = current
+            current = new
+            answer += str(new) + " "
+    answer = answer[0: len(answer) - 1]
+    return answer
 
 
-print(fibonacci(300))
+
+print(fibonacci(8))
